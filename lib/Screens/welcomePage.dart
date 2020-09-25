@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sandovalportfolio/Screens/loginPage.dart';
 import 'package:sandovalportfolio/Screens/signup.dart';
@@ -12,6 +13,53 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePage extends State<WelcomePage> {
+  static const MethodChannel methodChannel =
+      MethodChannel('com.sandoval.sandovalporfolio/isHmsGmsAvailable');
+
+  bool _isHmsAvailable;
+  bool _isGmsAvailable;
+
+  @override
+  void initState() {
+    checkHmsGms();
+    super.initState();
+  }
+
+  void checkHmsGms() async {
+    await _isHMS();
+    await _isGMS();
+  }
+
+  Future<void> _isHMS() async {
+    bool status;
+    try {
+      bool result = await methodChannel.invokeMethod('isHmsAvailable');
+      status = result;
+      print('status: ${status.toString()}');
+    } on PlatformException {
+      print('failed to get _isHmsAvailable');
+    }
+
+    setState(() {
+      _isHmsAvailable = status;
+    });
+  }
+
+  Future<void> _isGMS() async {
+    bool status;
+    try {
+      bool result = await methodChannel.invokeMethod('isGmsAvailable');
+      status = result;
+      print('status: ${status.toString()}');
+    } on PlatformException {
+      print('failed to get _isHmsAvailable');
+    }
+
+    setState(() {
+      _isGmsAvailable = status;
+    });
+  }
+
   Widget _title() {
     return RichText(
       textAlign: TextAlign.center,
@@ -139,7 +187,7 @@ class _WelcomePage extends State<WelcomePage> {
               SizedBox(height: 20),
               _signUpButtom(),
               SizedBox(height: 20),
-              _label()
+              _label(),
             ],
           ),
         ),
