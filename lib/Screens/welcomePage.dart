@@ -52,7 +52,7 @@ class _WelcomePage extends State<WelcomePage> {
       status = result;
       print('status: ${status.toString()}');
     } on PlatformException {
-      print('failed to get _isHmsAvailable');
+      print('failed to get _isGmsAvailable');
     }
 
     setState(() {
@@ -78,7 +78,12 @@ class _WelcomePage extends State<WelcomePage> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => LoginPage(
+                      hmsAvailable: _isHmsAvailable,
+                      gmsAvailable: _isGmsAvailable,
+                    )));
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -109,7 +114,11 @@ class _WelcomePage extends State<WelcomePage> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignUpPage()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => SignUpPage(
+                    gmsAvailable: _isGmsAvailable,
+                    hmsAvailable: _isHmsAvailable)));
       },
       child: Container(
         width: MediaQuery.of(context).size.width,

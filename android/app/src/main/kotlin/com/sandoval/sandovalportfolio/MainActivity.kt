@@ -46,7 +46,7 @@ class MainActivity : FlutterActivity() {
             val result = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context)
             isAvailable = com.google.android.gms.common.ConnectionResult.SUCCESS == result
         }
-        Log.i("MainActivity", "isHmsAvailable: $isAvailable")
+        Log.i("MainActivity", "isGmsAvailable: $isAvailable")
         return isAvailable
     }
 
