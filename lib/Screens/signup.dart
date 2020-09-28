@@ -5,8 +5,11 @@ import 'package:sandovalportfolio/Widgets/bezierContainer.dart';
 
 class SignUpPage extends StatefulWidget {
   final String title;
+  final bool hmsAvailable;
+  final bool gmsAvailable;
 
-  SignUpPage({Key key, this.title}) : super(key: key);
+  SignUpPage({Key key, this.title, this.hmsAvailable, this.gmsAvailable})
+      : super(key: key);
 
   _SignUpPage createState() => _SignUpPage();
 }
@@ -102,7 +105,12 @@ class _SignUpPage extends State<SignUpPage> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => LoginPage(
+                      gmsAvailable: widget.gmsAvailable,
+                      hmsAvailable: widget.hmsAvailable,
+                    )));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20.0),
@@ -143,55 +151,108 @@ class _SignUpPage extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2)
-          ],
-          gradient: RadialGradient(
-            colors: [Colors.grey[400], Colors.grey[300], Colors.grey[100]],
-            center: Alignment(0.6, -0.3),
-            focal: Alignment(0.3, -0.1),
-            focalRadius: 1.0,
-          ),
-        ),
-        height: height,
-        child: Stack(
-          children: [
-            Positioned(
-              top: -height * .15,
-              right: -MediaQuery.of(context).size.width * 0.4,
-              child: BezierContainer(),
+    Widget child;
+    if (widget.gmsAvailable) {
+      child = Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.shade200,
+                  offset: Offset(2, 4),
+                  blurRadius: 5,
+                  spreadRadius: 2)
+            ],
+            gradient: RadialGradient(
+              colors: [Colors.grey[400], Colors.grey[300], Colors.grey[100]],
+              center: Alignment(0.6, -0.3),
+              focal: Alignment(0.3, -0.1),
+              focalRadius: 1.0,
             ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(height: height * 0.2),
-                    _title(),
-                    SizedBox(height: 50),
-                    _emailPasswordWidget(),
-                    SizedBox(height: 20),
-                    _submitButton(),
-                    SizedBox(height: height * 0.14),
-                    _loginAccountLabel(),
-                  ],
+          ),
+          height: height,
+          child: Stack(
+            children: [
+              Positioned(
+                top: -height * .15,
+                right: -MediaQuery.of(context).size.width * 0.4,
+                child: BezierContainer(),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(height: height * 0.2),
+                      _title(),
+                      SizedBox(height: 50),
+                      _emailPasswordWidget(),
+                      SizedBox(height: 20),
+                      _submitButton(),
+                      SizedBox(height: height * 0.14),
+                      _loginAccountLabel(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Positioned(top: 40, left: 0, child: _backButton()),
-          ],
+              Positioned(top: 40, left: 0, child: _backButton()),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    } else if (widget.hmsAvailable) {
+      return Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.shade200,
+                  offset: Offset(2, 4),
+                  blurRadius: 5,
+                  spreadRadius: 2)
+            ],
+            gradient: RadialGradient(
+              colors: [Colors.grey[400], Colors.grey[300], Colors.grey[100]],
+              center: Alignment(0.6, -0.3),
+              focal: Alignment(0.3, -0.1),
+              focalRadius: 1.0,
+            ),
+          ),
+          height: height,
+          child: Stack(
+            children: [
+              Positioned(
+                top: -height * .15,
+                right: -MediaQuery.of(context).size.width * 0.4,
+                child: BezierContainer(),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(height: height * 0.2),
+                      _title(),
+                      SizedBox(height: 70),
+                      _submitButton(),
+                      SizedBox(height: height * 0.14),
+                      _loginAccountLabel(),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(top: 40, left: 0, child: _backButton()),
+            ],
+          ),
+        ),
+      );
+    }
+    return child;
   }
 }

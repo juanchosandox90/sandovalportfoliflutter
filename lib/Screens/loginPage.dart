@@ -6,8 +6,11 @@ import 'package:sandovalportfolio/Widgets/bezierContainer.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
+  final bool hmsAvailable;
+  final bool gmsAvailable;
 
-  LoginPage({Key key, this.title}) : super(key: key);
+  LoginPage({Key key, this.title, this.hmsAvailable, this.gmsAvailable})
+      : super(key: key);
 
   _LoginPage createState() => _LoginPage();
 }
@@ -185,7 +188,12 @@ class _LoginPage extends State<LoginPage> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignUpPage()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => SignUpPage(
+                      gmsAvailable: widget.gmsAvailable,
+                      hmsAvailable: widget.hmsAvailable,
+                    )));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20.0),
@@ -225,6 +233,60 @@ class _LoginPage extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    Widget child;
+    // GMS Available
+    if (widget.gmsAvailable) {
+      child = Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(height: height * 0.2),
+          _title(),
+          SizedBox(height: 50),
+          _emailPasswordWidget(),
+          SizedBox(height: 20),
+          _submitButton(),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            alignment: Alignment.centerRight,
+            child: Text("Forgot Password ?",
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87)),
+          ),
+          _divider(),
+          _facebookButton(),
+          SizedBox(height: height * 0.055),
+          _createAccountLabel(),
+        ],
+      );
+      //HMS Available
+    } else if (widget.hmsAvailable) {
+      child = Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(height: height * 0.2),
+          _title(),
+          SizedBox(height: 70),
+          _submitButton(),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            alignment: Alignment.centerRight,
+            child: Text("Forgot Password ?",
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87)),
+          ),
+          _divider(),
+          _facebookButton(),
+          SizedBox(height: height * 0.055),
+          _createAccountLabel(),
+        ],
+      );
+    }
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -254,31 +316,7 @@ class _LoginPage extends State<LoginPage> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(height: height * 0.2),
-                    _title(),
-                    SizedBox(height: 50),
-                    _emailPasswordWidget(),
-                    SizedBox(height: 20),
-                    _submitButton(),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      alignment: Alignment.centerRight,
-                      child: Text("Forgot Password ?",
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black87)),
-                    ),
-                    _divider(),
-                    _facebookButton(),
-                    SizedBox(height: height * 0.055),
-                    _createAccountLabel(),
-                  ],
-                ),
+                child: child,
               ),
             ),
             Positioned(top: 40, left: 0, child: _backButton()),
