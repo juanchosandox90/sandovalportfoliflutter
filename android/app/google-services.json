@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "691288351461",
+    "firebase_url": "https://sandovalportfolio-e89ae.firebaseio.com",
+    "project_id": "sandovalportfolio-e89ae",
+    "storage_bucket": "sandovalportfolio-e89ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691288351461:android:7db21afc08ab86471b6a0c",
+        "android_client_info": {
+          "package_name": "com.sandoval.sandovalportfolio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691288351461-9qv0a2ajiph7oum1rfpehsup63tk7h9v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sandoval.sandovalportfolio",
+            "certificate_hash": "fdc66d38c9cc01ea5aba1156ba0b51aaf64f7e42"
+          }
+        },
+        {
+          "client_id": "691288351461-duqhed7dj4nkvtavqnhn1b3sr646td35.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sandoval.sandovalportfolio",
+            "certificate_hash": "625f0ccbcea16904e40067fe4b5c1efce848821b"
+          }
+        },
+        {
+          "client_id": "691288351461-6gurm6al6e6im55kcagojchnd8ssbivl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXvE_lrM9IySlJQb1lCk_GLoC_TKV8SZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691288351461-6gurm6al6e6im55kcagojchnd8ssbivl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

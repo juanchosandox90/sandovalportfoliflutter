@@ -42,6 +42,7 @@ class _WelcomePage extends State<WelcomePage> {
 
     setState(() {
       _isHmsAvailable = status;
+
     });
   }
 
@@ -165,6 +166,7 @@ class _WelcomePage extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
